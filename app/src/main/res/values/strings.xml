@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">SpaceDelivery</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="durability">Dayanıklılık(1)</string>
+    <string name="speed">Hız(1)</string>
+    <string name="capasity">Kapasite(1)</string>
+    <string name="ship_name">Uzay Aracı Adı</string>
+    <string name="score_header">Dağıtılacak Puan:</string>
 </resources>

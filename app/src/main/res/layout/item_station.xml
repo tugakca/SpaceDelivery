@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+
+
+        <variable
+            name="model"
+            type="com.android.ae08bc4bf43145be1c0a32f0872b7f47.model.Station" />
+    </data>
+
+
+<RelativeLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <ImageView
+        android:layout_margin="12dp"
+        android:layout_alignParentEnd="true"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@mipmap/ic_launcher" />
+
+
+    <LinearLayout
+        android:layout_margin="12dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/capacity"
+            setCapacity="@{model.capacity}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </TextView>
+
+        <TextView
+            android:id="@+id/stock"
+            setStock="@{model.stock}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </TextView>
+
+        <TextView
+            android:id="@+id/need"
+            setNeed="@{model.need}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </TextView>
+
+        <TextView
+            android:id="@+id/distance"
+             setDirX="@{model.coordinateX}"
+            setDirY="@{model.coordinateY}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </TextView>
+    </LinearLayout>
+    <TextView
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:id="@+id/planetName"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@{model.name}"
+
+        >
+    </TextView>
+
+
+    <TextView
+        android:visibility="gone"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:id="@+id/error"
+        android:layout_below="@id/planetName"
+        android:layout_centerInParent="true"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TRAVEL"
+        >
+    </TextView>
+
+    <TextView
+        android:background="@color/teal_200"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:id="@+id/travelButton"
+        android:layout_below="@id/planetName"
+        android:layout_centerInParent="true"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TRAVEL"
+        >
+    </TextView>
+
+</RelativeLayout>
+</layout>
