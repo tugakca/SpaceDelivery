@@ -1,4 +1,3 @@
-
 package com.android.ae08bc4bf43145be1c0a32f0872b7f47.viewmodel
 
 import androidx.lifecycle.MutableLiveData
@@ -19,15 +18,27 @@ class ShipViewModel
     val shipInfoLiveData: MutableLiveData<Ship> by lazy { MutableLiveData<Ship>() }
     val loading: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
     val error: MutableLiveData<Exception> by lazy { MutableLiveData<Exception>() }
+    val isDBClearLiveData: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
 
-
-
-    fun saveShipInfo(ship:Ship) {
+    fun saveShipInfo(ship: Ship) {
         loading.value = true
         viewModelScope.launch {
             try {
-                shipInfoLiveData.value=spaceUseCase.saveShipInfo(ship)
-                loading.value=false
+                shipInfoLiveData.value = spaceUseCase.saveShipInfo(ship)
+                loading.value = false
+            } catch (exception: Exception) {
+                error.value = exception
+            }
+        }
+
+    }
+
+    fun checkDeleteDB() {
+        viewModelScope.launch {
+            try {
+
+                isDBClearLiveData.value = spaceUseCase.deleteDB()
+                loading.value = false
             } catch (exception: Exception) {
                 error.value = exception
             }

@@ -18,12 +18,12 @@ object RepoModule {
 
     @Provides
     @Singleton
-    fun providePortfolioRepo(
-        ioDispatcher: CoroutineDispatcher,
-        spaceDao: SpaceDao,
-        api: SpaceApi,
+    fun provideSpaceRepo(
+            ioDispatcher: CoroutineDispatcher,
+            spaceDao: SpaceDao,
+            api: SpaceApi,
 
-        ): SpaceRepo {
+            ): SpaceRepo {
         return SpaceRepo(ioDispatcher, spaceDao, api)
     }
 

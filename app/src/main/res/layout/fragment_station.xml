@@ -1,136 +1,202 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="model"
             type="com.android.ae08bc4bf43145be1c0a32f0872b7f47.model.Ship" />
 
-
     </data>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:background="@color/main"
+        android:fillViewport="true"
+
         android:padding="12dp"
         tools:context=".view.StationFragment">
 
         <LinearLayout
-            android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal"
-            android:weightSum="3">
+            android:layout_height="0dp"
+            android:orientation="vertical">
 
-            <TextView
 
-                android:id="@+id/shipUGS"
-                android:gravity="center"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="4dp"
-                setUgs="@{model.capasity}" />
-
-            <TextView
-                android:id="@+id/shipEUS"
+                android:layout_marginTop="20dp"
                 android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <TextView
+                    android:id="@+id/shipUGS"
+                    setUgs="@{model.capasity}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:textColor="@color/text"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/shipEUS"
+                    setEus="@{model.speed}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:textColor="@color/text"
+                    android:textStyle="bold" />
+
+                <TextView
+                    setDs="@{model.durability}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:textColor="@color/text"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/white">
+
+            </View>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="4dp"
-                setEus="@{model.speed}" />
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <TextView
+                    android:id="@+id/shipNameTv"
+                    setShipName="@{model.name}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@color/text"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/damage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@{String.valueOf(model.damage)}"
+                    android:textColor="@color/text" />
+
+                <TextView
+                    android:id="@+id/timer"
+                    setDsTime="@{model.durability}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@color/text" />
+
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchView"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
+                android:background="@color/white"
+                app:iconifiedByDefault="false">
+
+            </androidx.appcompat.widget.SearchView>
 
             <TextView
-                android:gravity="center"
+                android:id="@+id/error"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="4dp"
-                setDs="@{model.durability}" />
-
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="20dp"
-            android:background="@color/black">
-
-        </View>
-
-        <LinearLayout
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:orientation="horizontal"
-            android:weightSum="3">
-
-            <TextView
-                android:gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-               setShipName="@{model.name}"
-                android:textSize="20sp" />
-            <TextView
-                android:id="@+id/damage"
-                android:gravity="center"
                 android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="100" />
-
-            <TextView
-                android:id="@+id/timer"
                 android:gravity="center"
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-               setDsTime="@{model.durability}" />
+                android:textColor="@color/text"
+                android:textSize="16sp"
+                android:visibility="gone">
 
-
-        </LinearLayout>
-
-        <androidx.appcompat.widget.SearchView
-            android:layout_marginTop="30dp"
-            android:layout_width="match_parent"
-            android:layout_height="50dp">
-
-        </androidx.appcompat.widget.SearchView>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-
-        <androidx.viewpager2.widget.ViewPager2
-
-            android:layout_weight="3"
-            android:id="@+id/viewpager"
-            android:layout_width="match_parent"
-            android:layout_height="0dp" />
-            <TextView
-                android:layout_weight="1"
-                android:layout_below="@+id/viewpager"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:id="@+id/currentLocation"
-                android:layout_width="match_parent"
-                android:layout_height="0dp">
             </TextView>
 
+
+            <RelativeLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+
+                    android:id="@+id/searchError"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:textColor="@color/text"
+                    android:textSize="16sp"
+                    android:visibility="gone">
+
+                </TextView>
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerInParent="true"
+                    android:indeterminateTint="@color/white"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:id="@+id/viewpagerLay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <androidx.viewpager2.widget.ViewPager2
+
+                        android:id="@+id/viewpager"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="3" />
+
+                    <TextView
+                        android:id="@+id/currentLocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@{model.currentLocation}"
+                        android:textColor="@color/text_dark"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
         </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 
 
 </layout>

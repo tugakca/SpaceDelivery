@@ -19,22 +19,22 @@ object RetrofitModule {
     @Provides
     fun provideGsonBuilder(): Gson {
         return GsonBuilder()
-            .create()
+                .create()
     }
 
     @Singleton
     @Provides
     fun provideRetrofit(gson: Gson): Retrofit.Builder {
         return Retrofit.Builder()
-            .baseUrl("https://run.mocky.io/v3/")
-            .addConverterFactory(GsonConverterFactory.create(gson))
+                .baseUrl("https://run.mocky.io/v3/")
+                .addConverterFactory(GsonConverterFactory.create(gson))
     }
 
     @Singleton
     @Provides
     fun provideSpaceService(retrofit: Retrofit.Builder): SpaceApi {
         return retrofit
-            .build()
-            .create(SpaceApi::class.java)
+                .build()
+                .create(SpaceApi::class.java)
     }
 }

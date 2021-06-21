@@ -5,7 +5,6 @@ import retrofit2.http.GET
 
 interface SpaceApi {
 
-
     @GET("e7211664-cbb6-4357-9c9d-f12bf8bab2e2")
     suspend fun getStationList(): List<Station>
 }

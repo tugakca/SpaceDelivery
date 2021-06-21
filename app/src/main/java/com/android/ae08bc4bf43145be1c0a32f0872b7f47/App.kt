@@ -9,10 +9,9 @@ import dagger.hilt.android.HiltAndroidApp
 @HiltAndroidApp
 class App : MultiDexApplication() {
 
-    companion object{
-        var shipInfo: Ship?=null
+    companion object {
+        var shipInfo: Ship? = null
     }
-
 
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)

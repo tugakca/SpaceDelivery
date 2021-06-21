@@ -1,17 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/main"
         tools:context=".view.FavoritesFragment">
 
+
         <TextView
+            android:id="@+id/favHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="4dp"
+            android:gravity="center"
+            android:text="Favoriler"
+            android:textColor="@color/text"
+            android:textSize="20sp"
+            android:textStyle="bold">
+
+        </TextView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@id/favHeader"
+            android:background="@color/white">
+
+        </View>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/favRv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
+            android:layout_below="@+id/favHeader"
+            android:layout_marginTop="20dp"
+            android:padding="12dp">
 
-    </FrameLayout>
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:indeterminateTint="@color/white"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="@string/hello_blank_fragment"
+            android:textColor="@color/text"
+            android:visibility="gone" />
+
+    </RelativeLayout>
 
 </layout>

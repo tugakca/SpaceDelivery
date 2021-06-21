@@ -31,6 +31,7 @@ class ShipFragment : Fragment() {
     private var speedScore = 1
     private var capasityScore = 1
     private var isMax = false
+    private var ship: Ship? = null
 
 
     override fun onCreateView(
@@ -44,34 +45,41 @@ class ShipFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setSeekBars()
-        viewModel.shipInfoLiveData.observe(viewLifecycleOwner,{
-            App.shipInfo=it
-            findNavController().navigate(R.id.stationFragment)
+        setObservers()
 
-        })
+
+
+
         binding.goButton.setOnClickListener {
+            if (durabilityScore + speedScore + capasityScore != 15) {
+                Toast.makeText(requireContext(), " 15 puan dağıtılmadı! ", Toast.LENGTH_SHORT).show()
 
+            } else {
+                ship = Ship(shipNameEt.text.toString(), durabilityScore, capasityScore, speedScore, "Dünya", 0.0, 0.0, null, null, null, 100)
+                viewModel.checkDeleteDB()
 
-            if(durabilityScore +speedScore+capasityScore!=15){
-                Toast.makeText(requireContext()," 15 puan dağıtılmadı! ",Toast.LENGTH_SHORT).show()
-
-            }else{
-                val ship = Ship(shipNameEt.text.toString(),durabilityScore,capasityScore,speedScore,"Dünya",0.0,0.0,0.0,0.0,0.0,0)
-                viewModel.saveShipInfo(ship)
             }
-
-
         }
+    }
+
+    private fun setObservers() {
+        viewModel.shipInfoLiveData.observe(viewLifecycleOwner, {
+            App.shipInfo = it
+            findNavController().navigate(R.id.stationFragment)
+        })
+        viewModel.isDBClearLiveData.observe(viewLifecycleOwner, {
+            if (it) {
+                viewModel.saveShipInfo(ship!!)
+            }
+        })
+
 
     }
 
     private fun setSeekBars() {
-
         binding.durabilitySb.progress = 1
         binding.speedSb.progress = 1
         binding.capasitySb.progress = 1
-
-
         binding.durabilitySb.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
 
@@ -91,8 +99,8 @@ class ShipFragment : Fragment() {
                             binding.durabilitySb.thumbTintList = ContextCompat.getColorStateList(requireContext(), R.color.black)
 
                         } else {
-                            binding.durabilitySb.progressTintList = ContextCompat.getColorStateList(requireContext(), R.color.teal_200)
-                            binding.durabilitySb.thumbTintList = ContextCompat.getColorStateList(requireContext(), R.color.teal_200)
+                            binding.durabilitySb.progressTintList = ContextCompat.getColorStateList(requireContext(), R.color.white)
+                            binding.durabilitySb.thumbTintList = ContextCompat.getColorStateList(requireContext(), R.color.button)
                             durabilityScore = progress
                         }
 
@@ -137,8 +145,8 @@ class ShipFragment : Fragment() {
                             binding.speedSb.thumbTintList = ContextCompat.getColorStateList(requireContext(), R.color.black)
 
                         } else {
-                            binding.speedSb.progressTintList = ContextCompat.getColorStateList(requireContext(), R.color.teal_200)
-                            binding.speedSb.thumbTintList = ContextCompat.getColorStateList(requireContext(), R.color.teal_200)
+                            binding.speedSb.progressTintList = ContextCompat.getColorStateList(requireContext(), R.color.white)
+                            binding.speedSb.thumbTintList = ContextCompat.getColorStateList(requireContext(), R.color.button)
                             speedScore = progress
                         }
                         isMax = false
@@ -175,8 +183,8 @@ class ShipFragment : Fragment() {
                             binding.capasitySb.thumbTintList = ContextCompat.getColorStateList(requireContext(), R.color.black)
 
                         } else {
-                            binding.capasitySb.progressTintList = ContextCompat.getColorStateList(requireContext(), R.color.teal_200)
-                            binding.capasitySb.thumbTintList = ContextCompat.getColorStateList(requireContext(), R.color.teal_200)
+                            binding.capasitySb.progressTintList = ContextCompat.getColorStateList(requireContext(), R.color.white)
+                            binding.capasitySb.thumbTintList = ContextCompat.getColorStateList(requireContext(), R.color.button)
                             capasityScore = progress
                         }
                         isMax = false

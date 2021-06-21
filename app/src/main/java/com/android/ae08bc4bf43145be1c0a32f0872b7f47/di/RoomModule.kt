@@ -18,17 +18,17 @@ import javax.inject.Singleton
 object RoomModule {
     @Provides
     @Singleton
-    fun provideCoinDb(@ApplicationContext context: Context): SpaceDatabase {
+    fun provideSpaceDb(@ApplicationContext context: Context): SpaceDatabase {
         return Room.databaseBuilder(
-            context, SpaceDatabase::class.java,
-            SpaceDatabase.DATABASE_NAME
+                context, SpaceDatabase::class.java,
+                SpaceDatabase.DATABASE_NAME
         )
-            .build()
+                .build()
     }
 
     @Singleton
     @Provides
-    fun provideCoinDAO(coinDatabase: SpaceDatabase): SpaceDao {
-        return coinDatabase.coinDao()
+    fun provideSpaceDAO(spaceDatabase: SpaceDatabase): SpaceDao {
+        return spaceDatabase.spaceDao()
     }
 }

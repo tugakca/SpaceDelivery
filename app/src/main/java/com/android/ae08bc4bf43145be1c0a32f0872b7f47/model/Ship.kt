@@ -8,29 +8,30 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "ship")
 data class Ship(
         @ColumnInfo(name = "name")
-        var name:String?,
+        var name: String?,
         @ColumnInfo(name = "durability")
-        var durability:Int?,
+        var durability: Int?,
         @ColumnInfo(name = "capasity")
-        var capasity:Int?,
+        var capasity: Int?,
         @ColumnInfo(name = "speed")
-        var speed:Int?,
+        var speed: Int?,
         @ColumnInfo(name = "currentLocation")
-        var currentLocation:String?,
+        var currentLocation: String?,
         @ColumnInfo(name = "dirX")
-        var dirX:Double?,
+        var dirX: Double?,
         @ColumnInfo(name = "dirY")
-        var dirY:Double?,
+        var dirY: Double?,
         @ColumnInfo(name = "currentUGS")
-        var currentUGS:Double,
+        var currentUGS: Double?,
         @ColumnInfo(name = "currentEUS")
-        var currentEUS:Double,
+        var currentEUS: Double?,
         @ColumnInfo(name = "currentDS")
-        var currentDS:Double,
+        var currentDS: Double?,
         @ColumnInfo(name = "damage")
-        var damage:Int
+        var damage: Int?
 
-        ) {
-        @PrimaryKey(autoGenerate = true)
-        var shipUuid:Int?=null
+) {
+    @PrimaryKey(autoGenerate = true)
+    var shipUuid: Int? = null
+    var allMissionsDone = false
 }

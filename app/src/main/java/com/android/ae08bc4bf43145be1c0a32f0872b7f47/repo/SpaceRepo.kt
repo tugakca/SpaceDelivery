@@ -16,8 +16,29 @@ class SpaceRepo
 ) {
 
 
-    suspend fun getStationList(): List<Station>? {
+    suspend fun searchItem(value: String): ArrayList<Station> {
+        var allList: List<Station>? = null
+        var searchList = arrayListOf<Station>()
+        withContext(ioDispatcher) {
+            try {
+                allList = spaceDao.getStationFromDb()
 
+                allList!!.forEach {
+                    if (it.name.contains(value, ignoreCase = true)) {
+                        searchList.add(it)
+
+                    }
+                }
+
+            } catch (e: java.lang.Exception) {
+                throw e
+            }
+        }
+        return searchList
+    }
+
+
+    suspend fun getStationList(): List<Station>? {
         var stationList: List<Station>? = null
         try {
 
@@ -79,5 +100,90 @@ class SpaceRepo
         }
         shipInfo = spaceDao.getShipInfoFromDb()
         return shipInfo
+    }
+
+
+    suspend fun getShipInfo(): Ship? {
+        var shipInfo: Ship? = null
+        withContext(ioDispatcher) {
+            try {
+                shipInfo = spaceDao.getShipInfoFromDb()
+            } catch (e: java.lang.Exception) {
+                throw e
+            }
+        }
+        return shipInfo
+    }
+
+
+    suspend fun updateShipInfo(shipInfo: Ship): Ship {
+        var ship: Ship? = null
+        withContext(ioDispatcher) {
+            try {
+
+                spaceDao.updateShipItem(shipInfo)
+
+            } catch (e: java.lang.Exception) {
+                throw e
+            }
+        }
+
+        ship = spaceDao.getShipInfoFromDb()
+        return ship
+    }
+
+    suspend fun getFavList(): ArrayList<Station> {
+        var stationList: List<Station>? = null
+        var favList: ArrayList<Station> = arrayListOf()
+        withContext(ioDispatcher) {
+            try {
+                stationList = spaceDao.getStationFromDb()
+
+                stationList!!.forEach {
+                    if (it.isFavorite!!) {
+                        favList.add(it)
+                    }
+                }
+            } catch (e: java.lang.Exception) {
+                throw e
+            }
+        }
+        return favList
+    }
+
+
+    suspend fun deleteDB(): Boolean {
+        var success = false
+
+        withContext(ioDispatcher) {
+            try {
+
+                var stationList = spaceDao.getStationFromDb()
+                var shipItem = spaceDao.getShipInfoFromDb()
+
+                if (!stationList.isNullOrEmpty() && shipItem != null) {
+                    spaceDao.deleteDBShip()
+                    spaceDao.deleteDBStation()
+                    success = true
+                }
+            } catch (e: java.lang.Exception) {
+                throw e
+            }
+        }
+        return success
+    }
+
+    suspend fun favoriteOperation(addToFav: Boolean, station: Station): Station {
+        var list: Station? = null
+        withContext(ioDispatcher) {
+            try {
+                station.isFavorite = addToFav
+                spaceDao.updateStationItem(station)
+            } catch (e: java.lang.Exception) {
+                throw e
+            }
+        }
+        list = spaceDao.getFavList(addToFav, station.spaceUuid!!)
+        return list
     }
 }
