@@ -66,11 +66,11 @@ class StationFragment : Fragment(), TravelClickListener, FavoriteListener {
             refreshTime = (App.shipInfo?.durability!!.times(10000)).toLong()
             if (App.shipInfo?.damage != 0)
                 setTimer()
+
         }
         viewModel.getStationList()
         search()
         setObservers()
-
 //        binding.shipNameTv.setOnClickListener {
 //            findNavController().navigate(R.id.detailFragment)
 //        }
@@ -129,7 +129,8 @@ class StationFragment : Fragment(), TravelClickListener, FavoriteListener {
             binding.viewpagerLay.visibility = View.VISIBLE
             binding.error.visibility = View.GONE
 
-            if (!it.isNullOrEmpty()) {
+            if (!it.isNullOrEmpty() && App?.shipInfo!=null) {
+
                 createViewPager(it)
                 stationList = it
                 it.forEach {

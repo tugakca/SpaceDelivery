@@ -95,7 +95,7 @@ class ViewPagerAdapter(var stationList: List<Station>, val travelLister: TravelC
         }
 
         holder.binding.favIv.setOnClickListener {
-            if (!goEarth) {
+            if (!App?.shipInfo?.allMissionsDone!!) {
                 if (!stationList[position].isFavorite) {
                     favListener.favoriteClicked(true, stationList[position])
                 } else {

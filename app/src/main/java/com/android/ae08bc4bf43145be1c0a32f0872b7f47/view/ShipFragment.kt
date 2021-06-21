@@ -68,7 +68,6 @@ class ShipFragment : Fragment() {
         })
 
 
-
     }
 
     private fun setSeekBars() {
