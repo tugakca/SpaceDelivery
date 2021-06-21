@@ -56,33 +56,24 @@ class StationFragment : Fragment(), TravelClickListener, FavoriteListener {
         sharedPrefUtil.saveTime(System.currentTimeMillis())
         stationList = emptyList()
         if (App.shipInfo != null) {
-            if (App?.shipInfo?.allMissionsDone!!) {
-                if (App?.shipInfo?.name.isNullOrEmpty()) {
-                    App?.shipInfo?.name = "#9"
-                }
-                binding.model = App?.shipInfo
-                binding.searchView.visibility = View.GONE
-                binding.viewpagerLay.visibility = View.GONE
-                binding.searchError.visibility = View.VISIBLE
-                binding.searchError.text = "Bütün görevleri tamamladın,yeniden oynamak için gemi isminin üstüne bas ve yeniden başla. "
-            } else {
-                binding.searchView.visibility = View.VISIBLE
-                binding.viewpagerLay.visibility = View.VISIBLE
-                binding.searchError.visibility = View.GONE
-                refreshTime = (App.shipInfo?.durability!!.times(10000)).toLong()
-                if (App.shipInfo?.damage != 0)
-                    setTimer()
-                viewModel.getStationList()
-                search()
-                viewModel.getShipInfo()
-                setObservers()
-            }
-
+            if(App.shipInfo?.name.isNullOrEmpty())
+                App.shipInfo?.name="#9"
+            binding.model=App?.shipInfo
+        }else{
+            viewModel.getShipInfo()
         }
-
-        binding.shipNameTv.setOnClickListener {
-            findNavController().navigate(R.id.detailFragment)
+        if(App?.shipInfo?.allMissionsDone!=null && !App?.shipInfo?.allMissionsDone!!){
+            refreshTime = (App.shipInfo?.durability!!.times(10000)).toLong()
+            if (App.shipInfo?.damage != 0)
+                setTimer()
         }
+        viewModel.getStationList()
+        search()
+        setObservers()
+
+//        binding.shipNameTv.setOnClickListener {
+//            findNavController().navigate(R.id.detailFragment)
+//        }
 
     }
 
@@ -123,8 +114,8 @@ class StationFragment : Fragment(), TravelClickListener, FavoriteListener {
             binding.model = it
             refreshTime = (it.durability!!.times(10000)).toLong()
 
-            if (it.damage != 0)
-                setTimer()
+//            if (it.damage != 0)
+//                setTimer()
         })
         viewModel.updateMissionLiveData.observe(viewLifecycleOwner, {
             it?.let { item ->

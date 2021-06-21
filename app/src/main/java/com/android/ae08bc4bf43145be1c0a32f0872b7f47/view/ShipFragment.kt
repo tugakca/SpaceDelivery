@@ -56,8 +56,7 @@ class ShipFragment : Fragment() {
 
             } else {
                 ship = Ship(shipNameEt.text.toString(), durabilityScore, capasityScore, speedScore, "Dünya", 0.0, 0.0, null, null, null, 100)
-                viewModel.checkDeleteDB()
-
+                viewModel.saveShipInfo(ship!!)
             }
         }
     }
@@ -67,11 +66,7 @@ class ShipFragment : Fragment() {
             App.shipInfo = it
             findNavController().navigate(R.id.stationFragment)
         })
-        viewModel.isDBClearLiveData.observe(viewLifecycleOwner, {
-            if (it) {
-                viewModel.saveShipInfo(ship!!)
-            }
-        })
+
 
 
     }

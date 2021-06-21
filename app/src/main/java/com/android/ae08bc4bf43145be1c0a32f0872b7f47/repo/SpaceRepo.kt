@@ -152,26 +152,7 @@ class SpaceRepo
     }
 
 
-    suspend fun deleteDB(): Boolean {
-        var success = false
 
-        withContext(ioDispatcher) {
-            try {
-
-                var stationList = spaceDao.getStationFromDb()
-                var shipItem = spaceDao.getShipInfoFromDb()
-
-                if (!stationList.isNullOrEmpty() && shipItem != null) {
-                    spaceDao.deleteDBShip()
-                    spaceDao.deleteDBStation()
-                    success = true
-                }
-            } catch (e: java.lang.Exception) {
-                throw e
-            }
-        }
-        return success
-    }
 
     suspend fun favoriteOperation(addToFav: Boolean, station: Station): Station {
         var list: Station? = null

@@ -18,7 +18,6 @@ class ShipViewModel
     val shipInfoLiveData: MutableLiveData<Ship> by lazy { MutableLiveData<Ship>() }
     val loading: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
     val error: MutableLiveData<Exception> by lazy { MutableLiveData<Exception>() }
-    val isDBClearLiveData: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
 
     fun saveShipInfo(ship: Ship) {
         loading.value = true
@@ -33,17 +32,6 @@ class ShipViewModel
 
     }
 
-    fun checkDeleteDB() {
-        viewModelScope.launch {
-            try {
 
-                isDBClearLiveData.value = spaceUseCase.deleteDB()
-                loading.value = false
-            } catch (exception: Exception) {
-                error.value = exception
-            }
-        }
-
-    }
 
 }

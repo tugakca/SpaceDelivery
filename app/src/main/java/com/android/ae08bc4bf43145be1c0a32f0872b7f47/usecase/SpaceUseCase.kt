@@ -21,17 +21,6 @@ class SpaceUseCase
     }
 
 
-    suspend fun deleteDB(): Boolean {
-        var success = false
-        try {
-            success = spaceRepo.deleteDB()
-        } catch (e: Exception) {
-            throw e
-        }
-        return success
-    }
-
-
     suspend fun searchItem(value: String): ArrayList<Station> {
         var searchList: ArrayList<Station>? = null
         try {

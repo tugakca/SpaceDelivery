@@ -36,15 +36,15 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-//        if(sharedPref.isFirstRun(this)){
-//
-//            navController.navigate(R.id.detailFragment)
-//            selectedItem=R.id.detailFragment
-//
-//        }else{
-//            navController.navigate(R.id.stationFragment)
-//            selectedItem=R.id.stationFragment
-//        }
+        if(sharedPref.isFirstRun(this)){
+
+            navController.navigate(R.id.detailFragment)
+            selectedItem=R.id.detailFragment
+
+        }else{
+            navController.navigate(R.id.stationFragment)
+            selectedItem=R.id.stationFragment
+        }
 
         bottomNavigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
